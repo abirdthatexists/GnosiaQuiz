@@ -158,7 +158,7 @@ const data = {
     pointBackgroundColor: 'rgba(204, 204, 204)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(204, 204, 204)',
+    pointHoverBorderColor: 'rgba(204, 204, 204xw)',
     hidden: true
   },{
     label: 'Yuriko',
