@@ -153,12 +153,12 @@ const data = {
     label: 'Remnan',
     data: [2, 41, 28, 29, 33, 43.5],
     fill: true,
-    backgroundColor: 'rgba(254, 254, 252, 0.2)',
-    borderColor: 'rgba(254, 254, 252)',
-    pointBackgroundColor: 'rgba(254, 254, 252)',
+    backgroundColor: 'rgba(204, 204, 204, 0.2)',
+    borderColor: 'rgba(204, 204, 204)',
+    pointBackgroundColor: 'rgba(204, 204, 204)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(254, 254, 252)',
+    pointHoverBorderColor: 'rgba(204, 204, 204)',
     hidden: true
   },{
     label: 'Yuriko',
