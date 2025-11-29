@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Gnosia Quiz</title>
+  </head>
+  <body>
+  <input type="button" value="View results" onclick="toggle_visibility('result');">
+  <div id="result" style="display:none;">
+  <div>
+  <input type="button" value="Results" onclick="toggle(0)">
+  <input type="button" value="Setsu" onclick="toggle(1)">
+  <input type="button" value="Gina" onclick="toggle(2)">
+  <input type="button" value="SQ" onclick="toggle(3)">
+  <input type="button" value="Raqio" onclick="toggle(4)">
+  <input type="button" value="Stella" onclick="toggle(5)">
+  <input type="button" value="Shigemichi" onclick="toggle(6)">
+  <input type="button" value="Chipie" onclick="toggle(7)">
+  <input type="button" value="Comet" onclick="toggle(8)">
+  <input type="button" value="Jonas" onclick="toggle(9)">
+  <input type="button" value="Kukrushka" onclick="toggle(10)">
+  <input type="button" value="Otome" onclick="toggle(11)">
+  <input type="button" value="Sha-Ming" onclick="toggle(12)">
+  <input type="button" value="Remnan" onclick="toggle(13)">
+  <input type="button" value="Yuriko" onclick="toggle(14)">
+</div>
+  <div>
+      <input type="button" value="Hide All" onclick="hideAll()">
+      <input type="button" value="Show All" onclick="showAll()">
+  </div>
+  <!-- <div style="width: 500px;"><canvas id="dimensions"></canvas></div><br/> -->
+    <div style="width: 400px;"><canvas id="quizResults"></canvas></div>
+
+    <!-- <script type="module" src="dimensions.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="quizResults.js"></script>
+  </div>
+  </body>
+<script type="text/javascript">
+   function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+   }
+</script>
+</html>
