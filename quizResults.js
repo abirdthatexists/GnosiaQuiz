@@ -209,8 +209,6 @@ function showResults() {
             const value = parseInt(answerElement.value);
             results[attrIndex] += value;
         } else {
-            console.log(document.getElementById(`question${questionNumber}`));
-            console.log(`question${questionNumber}`);
             document.getElementById(`question${questionNumber}`).style.color = "red";
             allAnswered = false;
         }
@@ -219,6 +217,34 @@ function showResults() {
     if (allAnswered) {
     console.log(results);
     data.datasets[0].data = results;
+    const textResults = []
+    const attributes = ["Charisma", "Intuition", "Logic","Charm", "Performance","Stealth"];
+    results.forEach((currentResult, currentIndex) => {
+        textResults.push(`${attributes[currentIndex]}: ${currentResult}`);
+    });
+        document.getElementById("numericalresults").innerHTML = "Your results are: <br>" + textResults.join("<br>");
+
+    let similarCharacter = "";
+    let similarCharacterIndex = -1;
+    let minDifference = 10000;
+    data.datasets.forEach((currentData, currentIndex) => {
+        if(currentIndex !== 0) {
+            let currentDifference = 0;
+            currentData.data.forEach((currentAttribute, currentAttrIndex) => {
+                currentDifference+= Math.abs(currentAttribute-results[currentAttrIndex]);
+            });
+            if (currentDifference < minDifference) {
+                similarCharacter = currentData.label;
+                minDifference = currentDifference;
+                if(similarCharacterIndex !== -1) {
+                    data.datasets[similarCharacterIndex].hidden = true;
+                }
+                data.datasets[currentIndex].hidden = false;
+                similarCharacterIndex = currentIndex;
+            }
+        }
+        });
+    document.getElementById("characterresults").innerHTML = `You are most similar to ${similarCharacter}!`;
     radarChart.update();
     resultsContainer.style.display = "block";
     document.getElementById('submissionwarning').style.display = "none";
