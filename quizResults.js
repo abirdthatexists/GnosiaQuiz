@@ -52,14 +52,14 @@ const data = {
     hidden: true
   },{
     label: 'Raqio',
-    data: [22, 21.5, 12, 46, 47.5, 38.5],
+    data: [16.5, 0.5, 49.5, 7.5, 35.5, 20.5],
     fill: true,
-    backgroundColor: 'rgba(229, 0, 58, 0.2)',
-    borderColor: 'rgba(229, 0, 58)',
-    pointBackgroundColor: 'rgba(229, 0, 58)',
+    backgroundColor: 'rgba(2, 101, 149, 0.2)',
+    borderColor: 'rgba(2, 101, 149)',
+    pointBackgroundColor: 'rgba(2, 101, 149)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(229, 0, 58)',
+    pointHoverBorderColor: 'rgba(2, 101, 149)',
     hidden: true
   },{
     label: 'Stella',
