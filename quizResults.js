@@ -9,7 +9,7 @@ const data = {
   ],
   datasets: [{
       label: 'Results',
-    data: [25, 25, 25, 25, 25, 25],
+    data: [0,0,0,0,0,0],
     fill: true,
     backgroundColor: 'rgba(90, 101, 117, 0.2)',
     borderColor: 'rgb(90, 101, 117)',
@@ -158,7 +158,7 @@ const data = {
     pointBackgroundColor: 'rgba(204, 204, 204)',
     pointBorderColor: '#fff',
     pointHoverBackgroundColor: '#fff',
-    pointHoverBorderColor: 'rgba(204, 204, 204xw)',
+    pointHoverBorderColor: 'rgba(204, 204, 204)',
     hidden: true
   },{
     label: 'Yuriko',
@@ -192,22 +192,37 @@ radarChart = new Chart(ctx, {
     options: options
 });
 
-function toggle(id) {
-    const data = radarChart.data.datasets[id];
-    data.hidden = !data.hidden;
-    radarChart.update();
-}
+function showResults() {
 
-function showAll() {
-    for (let i = 0; i <radarChart.data.datasets.length; i++) {
-        radarChart.data.datasets[i].hidden = false;
+    let allAnswered = true;
+    const answerContainers = quizContainer.querySelectorAll('.answers');
+    for(let i = 0; i<6;i++) {
+        results[i] = 0;
     }
-    radarChart.update();
-}
+    questions.forEach( (currentQuestion, questionNumber) => {
+        const answerContainer = answerContainers[questionNumber];
+        const selector = `input[name="question${questionNumber}"]:checked`;
+        const answerElement = (document.querySelector(selector));
+        if (answerElement) {
+            document.getElementById(`question${questionNumber}`).style.color = "black";
+            const attrIndex = parseInt(answerElement.dataset.attIndex);
+            const value = parseInt(answerElement.value);
+            results[attrIndex] += value;
+        } else {
+            console.log(document.getElementById(`question${questionNumber}`));
+            console.log(`question${questionNumber}`);
+            document.getElementById(`question${questionNumber}`).style.color = "red";
+            allAnswered = false;
+        }
 
-function hideAll() {
-    for (let i = 0; i <radarChart.data.datasets.length; i++) {
-        radarChart.data.datasets[i].hidden = true;
-    }
+    });
+    if (allAnswered) {
+    console.log(results);
+    data.datasets[0].data = results;
     radarChart.update();
+    resultsContainer.style.display = "block";
+    document.getElementById('submissionwarning').style.display = "none";
+    } else {
+         document.getElementById('submissionwarning').style.display = "block";
+    }
 }

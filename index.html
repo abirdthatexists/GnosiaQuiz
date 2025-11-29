@@ -7,43 +7,19 @@
   <div id="quiz">
 
   </div>
-  <!-- <input type="button" value="View results" onclick="toggle_visibility('results');"> -->
-  <div id="results" style="display: block;">
-  <!--<div>
-  <input type="button" value="Results" onclick="toggle(0)">
-  <input type="button" value="Setsu" onclick="toggle(1)">
-  <input type="button" value="Gina" onclick="toggle(2)">
-  <input type="button" value="SQ" onclick="toggle(3)">
-  <input type="button" value="Raqio" onclick="toggle(4)">
-  <input type="button" value="Stella" onclick="toggle(5)">
-  <input type="button" value="Shigemichi" onclick="toggle(6)">
-  <input type="button" value="Chipie" onclick="toggle(7)">
-  <input type="button" value="Comet" onclick="toggle(8)">
-  <input type="button" value="Jonas" onclick="toggle(9)">
-  <input type="button" value="Kukrushka" onclick="toggle(10)">
-  <input type="button" value="Otome" onclick="toggle(11)">
-  <input type="button" value="Sha-Ming" onclick="toggle(12)">
-  <input type="button" value="Remnan" onclick="toggle(13)">
-  <input type="button" value="Yuriko" onclick="toggle(14)">
-</div>
-  <div>
-      <input type="button" value="Hide All" onclick="hideAll()">
-      <input type="button" value="Show All" onclick="showAll()">
-  </div>-->
+  <input type="button" value="Submit" id ="submit" onClick="showResults()">
+  <div id="submissionwarning" style="display: none">
+      Not all questions have been responded to. Please respond to all questions.
+  </div>
+  <div id="results" style="display: none;">
+
     <div style="width: 600px;"><canvas id="quizResults"></canvas></div>
-    To view other characters' results, simply click their name on the chart above
+    To view other characters' results, simply click their name on the chart above.
     <!-- <script type="module" src="dimensions.js"></script> -->
+  </div>
+  <script src="quizQuestions.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="quizResults.js"></script>
-  </div>
+  <script src="quizLogic.js"></script>
   </body>
-<script type="text/javascript">
-   function toggle_visibility(id) {
-       var e = document.getElementById(id);
-       if(e.style.display == 'block')
-          e.style.display = 'none';
-       else
-          e.style.display = 'block';
-   }
-</script>
 </html>
