@@ -1,52 +1,18 @@
 // build quiz is from this tutorial: https://www.sitepoint.com/simple-javascript-quiz/
 
-const quizContainer = document.getElementById('quiz');
+const quizContainer = document.getElementById('question');
 const resultsContainer = document.getElementById('results');
 const submitButton = document.getElementById('submit');
-let results = [0,0,0,0,0,0];
+let results = [0, 0, 0, 0, 0, 0];
+let answers = [];
 
-window.onbeforeunload = function() {
-  return "Data will be lost if you leave the page, are you sure?";
+window.onbeforeunload = function () {
+    return "Data will be lost if you leave the page, are you sure?";
 };
 
 function buildQuiz() {
-    // variable to store the HTML output
-    const output = [];
     shuffle(questions);  //randomize question order
-    // for each question...
-    questions.forEach(
-        (currentQuestion, questionNumber) => {
-
-            // variable to store the list of possible answers
-            const answers = [];
-            const attributes = ["Charisma", "Intuition", "Logic","Charm", "Performance","Stealth"];
-            const attIndex = attributes.indexOf(currentQuestion.attribute);
-            // and for each available answer...
-            const responses = ["Never", "Rarely", "Sometimes", "Often", "Almost always", "Always"];
-            responses.forEach(
-                (response, value) => {
-                    if (currentQuestion.negative) {
-                        value = 5 - value;
-                    }
-                    // ...add an HTML radio button
-                    answers.push(
-                        `<label>
-            <input type="radio" name="question${questionNumber}" value="${value}" data-att-index="${attIndex}">
-            ${response}
-          </label>`
-                    );
-                });
-
-            // add this question and its answers to the output
-            output.push(
-                `<div class="question" id="question${questionNumber}"> ${currentQuestion.question} </div>
-        <div class="answers"> ${answers.join('')} </div>`
-            );
-        }
-    );
-
-    // finally combine our output list into one string of HTML and put it on the page
-    quizContainer.innerHTML = output.join('');
+    buildQuestion(0);
 }
 
 
@@ -65,6 +31,90 @@ function shuffle(array) {
         [array[currentIndex], array[randomIndex]] = [
             array[randomIndex], array[currentIndex]];
     }
+}
+
+function buildQuestion(number) {
+    let question = questions[number];
+    const answers = [];
+    const attributes = ["Charisma", "Intuition", "Logic", "Charm", "Performance", "Stealth"];
+    const attIndex = attributes.indexOf(question.attribute);
+    answers.push(`<span>Never</span>`);
+    
+    for (let value = 0; value < 6; value++) {
+        let question_value = value 
+        if (question.negative) {
+            question_value = 5 - value;
+        }
+        let type = "large";
+        if (value === 1 || value === 4) {
+            type = "med";
+        } else if (value === 2 || value === 3) {
+            type = "small";
+        }
+        
+        answers.push(
+            `<label class="container ${type}"> 
+  <input type="checkbox"  name="question${number}" value="${question_value}" data-att-index="${attIndex}">
+  <span class="checkmark"></span>
+    <div class="arc"></div>
+    <div class="arc2"></div>
+</label>`)
+    }
+    
+    answers.push(`<span>Always</span>`);
+    let result = `<div class="question" id="question${number}"> <b>${question.question}</b><br><br>
+        <div class="answers"> ${answers.join('')}</div></div>`;
+    
+    if (number !== 0) {
+        result += `<button class="button" onClick="back(${number})">Back</button>`;
+    }
+    quizContainer.innerHTML = result;
+
+    const questionContainer = document.getElementById(`question${number}`);
+
+    questionContainer.addEventListener("animationend", function (event) {
+        if (event.animationName !== 'circleClicked') {
+            return;
+        }
+        const checked = document.querySelectorAll(".question input[type=checkbox]:checked")[0];
+        onClick(checked);
+    });
+
+}
+
+function onClick(radioElement) {
+    const currentNumber = parseInt(radioElement.name.substring(8)) + 1;
+    const percent = (currentNumber) / 60;
+    const attr = radioElement.dataset.attIndex
+    const val = parseInt(radioElement.value)
+
+    results[attr] += val;
+    answers.push([attr, val])
+    if (currentNumber < 60) {
+        buildQuestion(currentNumber);
+        updatePercent(percent);
+    } else {
+        showResults();
+    }
+
+
+}
+
+function back(number) {
+    let lastRes = answers.pop();
+    const attr = lastRes[0];
+    const val = lastRes[1];
+    results[attr]-=val;
+    buildQuestion(number-1);
+    updatePercent((number-1)/60);
+    
+    
+}
+
+function updatePercent(percent) {
+    document.getElementById('percent').innerHTML = `The Silver Key is ${Math.round(percent * 100)}% full.`
+    document.getElementById('full-key').style.clipPath = `inset(${Math.round((1 - percent) * 100*.70+16)}% 0 0 0)`;
+    document.getElementById('empty-key').style.clipPath = `inset(0 0 ${100-Math.round((1 - percent) * 100*.70+16)}% 0)`;
 }
 
 buildQuiz();

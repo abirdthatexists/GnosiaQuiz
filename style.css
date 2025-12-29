@@ -1,0 +1,317 @@
+html {
+    height: 100%;
+}
+
+:root {
+    --background: rgb(193, 252, 255); /* main page background + results border */
+    --backdrop-color: rgb(105, 224, 230); /* question background */
+    --check-inner-color: rgb(87, 196, 201);
+    --button-color: rgb(41, 167, 172);
+    --large-check-size: 50px;
+    --med-check-size: 40px;
+    --small-check-size: 30px;
+    --check-inner-diff: 12px;
+
+}
+
+@font-face {
+    font-family: 'DosisLight';
+    src: url('DosisLight-3jdp.ttf');
+}
+
+body {
+    background: var(--background);
+    text-align: center;
+    font-family: 'DosisLight', sans-serif;
+    position: relative;
+    font-size: 24px;
+    height: 100%;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+/* box based on https://stackoverflow.com/questions/74643594/how-can-i-make-a-cut-corner-with-border-radius */
+.box {
+    --c: 10px; /* the corner */
+    --b: 2px; /* border thickness*/
+    --o: -8px, -5px; /* offset*/
+    --border-color: white;
+    --background: var(--backdrop-color);
+    width: 60%;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    padding: 1.5em 0.5em;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box:before,
+.box:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    clip-path: polygon(var(--c) 0%, 100% 0%, 100% calc(100% - var(--c)), calc(100% - var(--c)) 100%, 0% 100%, 0% calc(100% - var(--c)), 0% var(--c));
+    background: var(--background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.box:after {
+    --grad: transparent 49.5%, var(--border-color) 50%;
+    background: linear-gradient(to top left, var(--grad)) top left,
+    linear-gradient(to bottom right, var(--grad)) bottom right;
+    background-size: calc(var(--c) - var(--b)) calc(var(--c) - var(--b));
+    background-repeat: no-repeat;
+    border: var(--b) solid var(--border-color);
+    transform: translate(var(--o));
+}
+
+
+.box.results {
+    --border-color: var(--backdrop-color);
+    --background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+}
+
+/* ==== SILVER KEY GRAPHIC ==== */
+/* silver key styling based on https://stackoverflow.com/questions/19599551/gray-out-a-section-of-an-image-with-css */
+.key-container {
+    position: relative;
+    height: 20vh;
+    width: 20%;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.key-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    z-index: 2;
+    overflow: hidden;
+    clip-path: inset(100% 0 0 0);
+}
+
+.key-empty {
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 1;
+    clip-path: inset(0 0 0 0);
+}
+
+
+/* ==== CUSTOM RADIO BUTTONS ==== */
+/* based on https://www.w3schools.com/howto/howto_css_custom_checkbox.asp */
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    width: var(--check-size);
+    height: var(--check-size);
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container.large {
+    --check-size: var(--large-check-size);
+}
+
+.container.med {
+    --check-size: var(--med-check-size);
+}
+
+.container.small {
+    --check-size: var(--small-check-size);
+}
+
+/* Hide the browser's default radio button */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: var(--check-size);
+    width: var(--check-size);
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.container:hover input:not(:checked) ~ .arc, .container:hover input:not(:checked) ~ .arc2 {
+    opacity: 1;
+    animation: arcHovered 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+
+.container input:checked ~ .arc, .container:hover input:checked ~ .arc2 {
+    animation: arcClicked 0.45s;
+    transition-property: opacity;
+    transition-delay: 0.45s;
+    opacity: 0;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+    animation: circleClicked 1.5s;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+    top: 50%;
+    left: 50%;
+    width: calc(var(--check-size) - var(--check-inner-diff));
+    height: calc(var(--check-size) - var(--check-inner-diff));
+    border-radius: 50%;
+    background: var(--check-inner-color);;
+    transform: translate(-50%, -50%);
+
+}
+
+
+@keyframes radioHovered {
+    0% {
+        transform: scale(.5);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes radioPressed {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.arc, .arc2 {
+    width: calc(var(--check-size) - var(--check-inner-diff));
+    height: calc(var(--check-size) - var(--check-inner-diff));
+    border-radius: 50%;
+    border: 1px solid transparent;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.arc {
+    border-left-color: var(--check-inner-color);;
+}
+
+.arc2 {
+    border-right-color: var(--check-inner-color);
+}
+
+.button {
+    border-radius: 25%;
+    background-color: white;
+    border-color: var(--button-color);
+    font-size: 16px;
+    font-family: 'DosisLight', sans-serif;
+    margin-right: 15px;
+
+}
+
+@keyframes arcHovered {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg)
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg)
+    }
+}
+
+@keyframes arcClicked {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes circleClicked {
+    0% {
+        transform: translate(-50%, -50%) scale(0)
+    }
+    15% {
+        transform: translate(-50%, -50%) scale(0.15)
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.25)
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1)
+    }
+}
+
+@keyframes cycle {
+    from {
+        clip-path: inset(0% 0 0 0);
+    }
+    to {
+        clip-path: inset(100% 0 0 0);
+    }
+}
+
+.answers {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}

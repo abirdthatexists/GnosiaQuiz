@@ -304,3 +304,20 @@ const questions = [
 
 
 ]
+
+const comparisons = [
+    "Like Setsu, you tend to lead the group discussion and focus on sharing information. You are logical and well-rounded, but tend to stand out and draw a lot of negative attention that makes you easily targeted.",
+    "Like Gina, you're an intuitive player who can easily spot lies, although you struggle with telling them yourself. You're fairly decent at staying alive and catching contradictions, but you're at your best when you can convince others to vote on the liars you've spotted.",
+    "Like SQ, you are a social player, talented at convincing people to trust what you have to say. A skilled liar, you accrue many allies by appearing trustworthy and hiding your tells. You rarely go on the offensive, preferring to stay alive than getting others executed.",
+    "Like Raqio, you tend to excel at the deduction side of social deduction. You are highly logical and do best late-game, when more pieces of information exist for you to unravel. Unfortunately, you tend to draw attention easily, as you may struggle at convincing others to trust you.",
+    "Like Stella, you are a logical and well-rounded player who is often overlooked. You tend to avoid risky plays, and search for safe strategies instead.",
+    "Like Shigemichi, you're easy to read, even when you don't intend to be. It's easy for you to gain the trust of others when you're telling the truth, and you're utterly hopeless in a lying role. You're quick to jump to the defense of others, and can get away with saying nearly anything.",
+    "Like Chipie, you are a very social player who remains loyal to their allies. Your first priority is often to begin building up trust with someone so they will defend you, whether or not you plan to betray them in the end. You also have a very intuitive side, and can read the behaviour of others to determine their trustworthiness.",
+    "Like Comet, you are a highly intuitive player, able to spot most people when they lie. When you do catch someone, you're quick to act on your gut feelings, without necessarily considering the logical implications of doing so.",
+    "Like Jonas, you rarely show your true skills in games, instead favouring a chaotic playstyle. Others don't know how to read your behaviour, and this often works to your favour. When your goal is to win, you're often successful.",
+    "Like Kukrushka, you ignore logic and prioritize the social game, making allies who will defend you and using pity to your advantage when doubted. You target others on the basis of instinct and personal opinion alone, getting rid of your enemies before the strongest threats.",
+    "Like Otome, you are a logical player who can catch others in contradictions. Your likeability helps keep you alive, and allows you to gather allies with whom you can act on the worlds you've deduced.",
+    "Like Sha-Ming, you concentrate on surviving to the end as much as possible. You tend to stay quiet, drawing less attention to yourself and focusing less on the game, hence appearing as less of a threat to your opponents.",
+    "Like Remnan, you're a quiet player who usually takes a passive role in the discussion. Highly observant and decently logical, you often come to correct conclusions but struggle to make your voice heard. When in a lying role, you occasionally show a more aggressive playstyle.",
+    "Like Yuriko, you are a skilled player that can command the discussion and flow of information alike. Your outspoken nature will draw attention to your actions, but if left unchecked you can readily turn the tides of the game in your favor."
+]

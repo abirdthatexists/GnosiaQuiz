@@ -1,31 +1,30 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <title>Gnosia Quiz</title>
-  </head>
-  <body>
-  Original quiz by Dani!
-  <div id="quiz">
-  </div>
-  <input type="button" value="Submit" id ="submit" onClick="showResults()">
-  <div id="submissionwarning" style="display: none">
-      Not all questions have been responded to. Please respond to all questions.
-  </div>
-  <div id="results" style="display: none;">
-     <div id="numericalresults">
-         This text should not be seen.
-     </div>
-      <div id="characterresults">
-          This text should also not be seen.
-      </div>
-
-    <div style="width: 600px;"><canvas id="quizResults"></canvas></div>
-    To view other characters' results, simply click their name on the chart above.
-    <!-- <script type="module" src="dimensions.js"></script> -->
-  </div>
-  <script src="quizQuestions.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<img src="logo-transparent.png" alt="Gnosia logo" style="display: block; margin-left: auto; margin-right: auto; width: 50%; margin-bottom: 10px">
+<div style="display: block; margin-left: auto; margin-right: auto; width: 80%;">
+Thank you to Dani for the original quiz and help with the character results!</div>
+<div class="box" id="question">
+</div>
+<div id="results" style="display: none;" class="box results">
+    <div id="testresults" style="width: 50%; text-align: left; margin: auto">
+    </div>
+    <div style="height: 60%; width: 50%;">
+        <canvas id="quizResults"></canvas>
+    </div>
+    <script src="quizText.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="quizResults.js"></script>
-  <script src="quizLogic.js"></script>
-  </body>
+    <script src="quizLogic.js"></script>
+</div>
+<br><div class="key-container" id="key-container">
+    <img src="key-full.png" alt="full section of the Silver Key" class="key-full" id="full-key">
+  <img src="key-empty.png" alt="empty section of Silver Key" class="key-empty" id="empty-key">
+</div>
+<div id="percent">The Silver Key is 0% full.</div>
+</body>
 </html>
